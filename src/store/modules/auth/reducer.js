@@ -1,43 +1,46 @@
 import produce from 'immer';
 
+// CUSTOM IMPORTS
+import { isDataValid } from '~/utils/validations';
+import types from './types';
+
 const INITIAL_STATE = {
   token: null,
   signed: false,
-  loading: false,
+
+  // LOADING STATES
+  isSigningIn: false,
+  isSigningUp: false,
 };
 
-export default function auth(state = INITIAL_STATE, action) {
+export default function usersReducer(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
-      // SIGN IN
-      case '@auth/SIGN_IN_REQUEST': {
-        draft.loading = true;
+      // SIGN_UP
+      case types.SIGN_UP.REQUEST: {
+        draft.isSigningUp = true;
         break;
       }
-      case '@auth/SIGN_IN_SUCCESS': {
-        draft.token = action.payload.token;
-        draft.signed = true;
-        draft.loading = false;
+      case types.SIGN_UP.SUCCESSFUL: {
+        draft.isSigningUp = false;
         break;
       }
-      case '@auth/SIGN_IN_FAILURE': {
-        draft.loading = false;
+      case types.SIGN_UP.FAILED: {
+        draft.isSigningUp = false;
         break;
       }
 
-      // SIGN UP
-      case '@auth/SIGN_UP_SUCCESS': {
-        draft.token = action.payload.token;
-        draft.signed = true;
-        draft.loading = false;
+      // SIGN IN
+      case types.SIGN_IN.REQUEST: {
+        draft.isSigningIn = true;
         break;
       }
-      case '@auth/SIGN_UP_REQUEST': {
-        draft.loading = true;
+      case types.SIGN_IN.SUCCESSFUL: {
+        draft.isSigningIn = false;
         break;
       }
-      case '@auth/SIGN_UP_FAILURE': {
-        draft.loading = false;
+      case types.SIGN_IN.FAILED: {
+        draft.isSigningIn = false;
         break;
       }
 
@@ -45,6 +48,9 @@ export default function auth(state = INITIAL_STATE, action) {
       case '@auth/SIGN_OUT': {
         draft.token = null;
         draft.signed = false;
+        draft.isSigningUp = false;
+        draft.isSigningIn = false;
+
         break;
       }
       default:

@@ -4,6 +4,10 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FaGithub } from 'react-icons/fa';
 import { MdEmail, MdLock } from 'react-icons/md';
+import { useSelector, useDispatch } from 'react-redux';
+
+// ACTIONS
+import { signIn } from '~/store/modules/auth/actions';
 
 // CUSTOM IMPORTS
 import Button from '~/components/Button';
@@ -12,34 +16,46 @@ import { isDataValid } from '~/utils/validations';
 import { Container, Input } from './styles';
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const isSigningIn = useSelector(state => state.auth.isSigningIn);
+
   // REFS
   const formRef = React.useRef();
 
   // FUNCTION
-  const handleSubmit = React.useCallback(async data => {
-    try {
-      // Clear errors
-      if (isDataValid(formRef.current)) formRef.current.setErrors({});
+  const handleSubmit = React.useCallback(
+    async data => {
+      try {
+        const dispatchSubmit = () => {
+          dispatch(signIn(data));
+        };
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('Digite um email válido')
-          .required('O nome é obrigatório.'),
+        // Clear errors
+        if (isDataValid(formRef.current)) formRef.current.setErrors({});
 
-        password: Yup.string().required('A senha é obrigatória'),
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('Digite um email válido')
+            .required('O nome é obrigatório.'),
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-    } catch (err) {
-      // Format yup errors
-      const errors = getYupErrors(err);
+          password: Yup.string().required('A senha é obrigatória'),
+        });
 
-      // Set errors into form inputs
-      if (isDataValid(formRef.current)) formRef.current.setErrors(errors);
-    }
-  }, []);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        dispatchSubmit();
+      } catch (err) {
+        // Format yup errors
+        const errors = getYupErrors(err);
+
+        // Set errors into form inputs
+        if (isDataValid(formRef.current)) formRef.current.setErrors(errors);
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <Container>
@@ -49,6 +65,7 @@ export default function SignIn() {
         <h1 className="auth-title">Faça seu login</h1>
 
         <Input
+          type="email"
           className="auth-input"
           name="email"
           placeholder="Email"
@@ -56,6 +73,7 @@ export default function SignIn() {
         />
 
         <Input
+          type="password"
           className="auth-input"
           name="password"
           placeholder="Senha"

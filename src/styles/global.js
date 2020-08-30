@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 // CUSTOM IMPORTS
-import { fonts } from '~/styles';
+import { fonts, colors } from '~/styles';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap');
@@ -24,6 +24,7 @@ export default createGlobalStyle`
     height: 100%;
     background: none;
     background-size: cover;
+    height: 100%:
   }
 
   body {
@@ -51,6 +52,12 @@ export default createGlobalStyle`
   input, button{
     font-size: ${fonts.regular};
   }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: ${colors.text} !important;
+    -webkit-box-shadow: 0 0 0 30px ${colors.primary} inset !important;
+  }
+}
 
   small{
     font: ${fonts.small} 'Roboto', sans-serif;

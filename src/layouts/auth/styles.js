@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import PerfectScroll from 'react-perfect-scrollbar';
 
 // CUSTOM IMPORTS
 import { colors } from '~/styles';
 
-export const Container = styled.div`
-  height: 100vh;
+export const Container = styled(PerfectScroll)`
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -22,7 +23,7 @@ export const Container = styled.div`
     margin: 0 auto;
     background: ${colors.primaryDark};
     border-radius: 8px;
-    padding: 64px;
+    padding: 40px 64px;
     box-shadow: 2px 5px 5px ${colors.black30};
     z-index: 1;
   }

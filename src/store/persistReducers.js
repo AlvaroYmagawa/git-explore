@@ -6,7 +6,6 @@ export default reducers => {
     {
       key: 'gitExplore',
       storage,
-      whiteList: ['auth', 'user'], // Only persists the reducers inside the whiteList
     },
     reducers
   );
