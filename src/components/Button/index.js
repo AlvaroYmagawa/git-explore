@@ -1,27 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from './styles';
+import { Container, Loader } from './styles';
 
-export default function Button({ className, children, onClick }) {
+function Button({ className, loading, children, ...rest }) {
   return (
     <Container
-      type="button"
-      className={className && className}
-      onClick={onClick && onClick}
+      id="animated-button"
+      loading={loading}
+      className={className}
+      {...rest}
     >
-      {children}
+      {loading ? <Loader animation="border" size={15} /> : children}
     </Container>
   );
 }
 
 Button.propTypes = {
   className: PropTypes.string,
+  loading: PropTypes.bool,
   children: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   className: null,
-  onClick: null,
+  loading: false,
 };
+
+export default Button;

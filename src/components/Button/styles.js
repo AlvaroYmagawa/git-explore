@@ -1,11 +1,40 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
+import Spinner from 'react-bootstrap/Spinner';
 import { colors } from '~/styles';
 
 export const Container = styled.button`
-  border-radius: 4px;
-  padding: 8px 16px;
-  color: #fff;
-  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props =>
+    props.loading ? darken(0.1, colors.accent) : colors.accent};
+  border: 0;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: bold;
-  box-shadow: 2px 4px 5px ${colors.regularShadow};
+  color: #fff;
+
+  ${props =>
+    props.disabled &&
+    css`
+      background: ${darken(0.15, colors.accent)};
+    `}
+
+  box-shadow: 0 2px 4px #00000040;
+
+  &:active,
+  &:hover {
+    background: ${darken(0.1, colors.accent)};
+    transition: background 0.2s ease;
+  }
+`;
+
+export const Loader = styled(Spinner)`
+  color: #fff;
+  height: 24px;
+  width: 24px;
 `;

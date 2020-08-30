@@ -4,7 +4,7 @@ import { persistReducer } from 'redux-persist';
 export default reducers => {
   const persistedReducer = persistReducer(
     {
-      key: 'appKey',
+      key: 'gitExplore',
       storage,
       whiteList: ['auth', 'user'], // Only persists the reducers inside the whiteList
     },
