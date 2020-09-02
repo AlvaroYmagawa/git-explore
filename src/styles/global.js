@@ -6,7 +6,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { fonts, colors } from '~/styles';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 
   /* RESET ALL DEFAULT CSS STYLE */
   *{
@@ -29,7 +29,7 @@ export default createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    font: ${fonts.regular} 'Roboto', sans-serif;
+    font: ${fonts.regular} 'Ubuntu', sans-serif;
   }
 
   a {

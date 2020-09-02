@@ -22,7 +22,7 @@ export default function RouteWrapper({
   }
 
   if (signed && !isPrivate) {
-    return <Redirect to="/timeline" />;
+    return <Redirect to="/home" />;
   }
 
   // LAYOUT CONTROLS

@@ -36,6 +36,11 @@ export default function usersReducer(state = INITIAL_STATE, action) {
         break;
       }
       case types.SIGN_IN.SUCCESSFUL: {
+        const { token } = action.payload;
+
+        draft.token = token;
+        draft.signed = true;
+
         draft.isSigningIn = false;
         break;
       }

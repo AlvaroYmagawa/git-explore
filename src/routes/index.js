@@ -3,9 +3,13 @@ import { Switch } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import Route from './Route';
+
 // PUBLIC URLS
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+
+// PRIVATE URLS
+import Home from '../pages/Home';
 
 export default function Routes() {
   return (
@@ -13,6 +17,9 @@ export default function Routes() {
       {/* PUBLIC ROUTES */}
       <Route path="/" exact component={SignIn} />
       <Route path="/signUp" exact component={SignUp} />
+
+      {/* PRIVATE ROUTES */}
+      <Route path="/home" exact isPrivate component={Home} />
 
       <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} />
     </Switch>

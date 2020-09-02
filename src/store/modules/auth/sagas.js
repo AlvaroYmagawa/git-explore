@@ -36,12 +36,15 @@ export function* signIn({ payload }) {
   try {
     const { session } = payload;
 
-    const response = yield call(api.post, 'api/register', session);
+    const response = yield call(api.post, 'api/login', {
+      email: 'eve.holt@reqres.in',
+      password: 'pistol',
+    });
 
     if (validResponseStatus(response.status)) {
-      const newUser = response.data;
+      const token = response.data;
 
-      yield put(signInSuccessful(newUser));
+      yield put(signInSuccessful(token, session));
     }
   } catch (err) {
     yield put(signInFailed());

@@ -27,10 +27,10 @@ export function signIn(session) {
     payload: { session },
   };
 }
-export function signInSuccessful(TOKEN) {
+export function signInSuccessful(token, user) {
   return {
     type: types.SIGN_IN.SUCCESSFUL,
-    payload: { TOKEN },
+    payload: { token, user },
   };
 }
 export function signInFailed() {
