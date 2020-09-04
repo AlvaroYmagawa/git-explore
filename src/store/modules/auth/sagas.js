@@ -17,7 +17,7 @@ export function* signUp({ payload }) {
   try {
     const { user } = payload;
 
-    const response = yield call(api.post, 'api/users', user);
+    const response = yield call(api.reqres.post, 'api/users', user);
 
     if (validResponseStatus(response.status)) {
       const newUser = response.data;
@@ -36,7 +36,7 @@ export function* signIn({ payload }) {
   try {
     const { session } = payload;
 
-    const response = yield call(api.post, 'api/login', {
+    const response = yield call(api.reqres.post, 'api/login', {
       email: 'eve.holt@reqres.in',
       password: 'pistol',
     });

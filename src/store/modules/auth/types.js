@@ -1,14 +1,15 @@
 const types = {
   SIGN_UP: {
-    REQUEST: '@users/SIGN_UP_REQUEST',
-    SUCCESSFUL: '@users/SIGN_UPSUCCESSFUL',
-    FAILED: '@users/SIGN_UP_FAILED',
+    REQUEST: '@auth/SIGN_UP_REQUEST',
+    SUCCESSFUL: '@auth/SIGN_UPSUCCESSFUL',
+    FAILED: '@auth/SIGN_UP_FAILED',
   },
   SIGN_IN: {
-    REQUEST: '@users/SIGN_IN_REQUEST',
-    SUCCESSFUL: '@users/SIGN_IN_SUCCESSFUL',
-    FAILED: '@users/SIGN_IN_FAILED',
+    REQUEST: '@auth/SIGN_IN_REQUEST',
+    SUCCESSFUL: '@auth/SIGN_IN_SUCCESSFUL',
+    FAILED: '@auth/SIGN_IN_FAILED',
   },
+  SIGN_OUT: '@auth/SIGN_OUT',
 };
 
 export default types;

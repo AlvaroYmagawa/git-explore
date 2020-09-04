@@ -16,6 +16,7 @@ export default function Routes() {
     <Switch>
       {/* PUBLIC ROUTES */}
       <Route path="/" exact component={SignIn} />
+      <Route path="/signIn" exact component={SignIn} />
       <Route path="/signUp" exact component={SignUp} />
 
       {/* PRIVATE ROUTES */}

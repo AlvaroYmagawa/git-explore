@@ -50,7 +50,7 @@ export default function usersReducer(state = INITIAL_STATE, action) {
       }
 
       // SIGN OUT
-      case '@auth/SIGN_OUT': {
+      case types.SIGN_OUT: {
         draft.token = null;
         draft.signed = false;
         draft.isSigningUp = false;

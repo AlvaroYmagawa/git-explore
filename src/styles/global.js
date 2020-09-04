@@ -24,7 +24,7 @@ export default createGlobalStyle`
     height: 100%;
     background: none;
     background-size: cover;
-    height: 100%:
+    height: 100%;
   }
 
   body {

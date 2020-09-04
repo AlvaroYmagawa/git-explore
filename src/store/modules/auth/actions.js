@@ -38,3 +38,10 @@ export function signInFailed() {
     type: types.SIGN_IN.FAILED,
   };
 }
+
+// SIGN OUT
+export function signOut() {
+  return {
+    type: types.SIGN_OUT,
+  };
+}

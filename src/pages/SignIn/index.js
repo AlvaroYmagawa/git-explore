@@ -36,7 +36,7 @@ export default function SignIn() {
         const schema = Yup.object().shape({
           email: Yup.string()
             .email('Digite um email válido')
-            .required('O nome é obrigatório.'),
+            .required('O email é obrigatório.'),
 
           password: Yup.string().required('A senha é obrigatória'),
         });
@@ -80,7 +80,7 @@ export default function SignIn() {
           icon={<MdLock />}
         />
 
-        <Button type="submit" className="auth-button">
+        <Button type="submit" className="auth-button" loading={isSigningIn}>
           Fazer Login
         </Button>
 

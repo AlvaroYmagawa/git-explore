@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
-import Spinner from 'react-bootstrap/Spinner';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+// CUSTOM IMPORTS
 import { colors } from '~/styles';
 
 export const Container = styled.button`
@@ -33,8 +35,8 @@ export const Container = styled.button`
   }
 `;
 
-export const Loader = styled(Spinner)`
-  color: #fff;
-  height: 24px;
-  width: 24px;
+export const Loader = styled(CircularProgress)`
+  svg {
+    color: ${colors.primaryDark};
+  }
 `;

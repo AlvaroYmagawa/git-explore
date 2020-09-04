@@ -11,7 +11,7 @@ function Button({ className, loading, children, ...rest }) {
       className={className}
       {...rest}
     >
-      {loading ? <Loader animation="border" /> : children}
+      {loading ? <Loader animation="border" size={24} /> : children}
     </Container>
   );
 }

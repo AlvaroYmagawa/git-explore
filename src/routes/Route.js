@@ -3,18 +3,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import AuthLayout from '~/layouts/auth';
 import DefaultLayout from '~/layouts/signed';
-
-import { store } from '~/store';
 
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  // GETTING SESSION STATUS INSIDE AUTH REDUCER
-  const { signed } = store.getState().auth;
+  // REDUCER
+  const { signed } = useSelector(state => state.auth);
 
   // REDIRECTS
   if (!signed && isPrivate) {
