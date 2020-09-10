@@ -42,7 +42,7 @@ export function* signIn({ payload }) {
     });
 
     if (validResponseStatus(response.status)) {
-      const token = response.data;
+      const { token } = response.data;
 
       yield put(signInSuccessful(token, session));
     }
