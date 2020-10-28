@@ -15,7 +15,6 @@ import {
   RepoTitle,
   Repo,
 } from './styles';
-import Header from '~/components/Header';
 import { isDataValid, isListValid } from '~/utils/validations';
 import { getYupErrors } from '~/utils/yup';
 import api from '~/services/api';
@@ -70,41 +69,41 @@ function Home() {
 
   return (
     <Container>
-      <Header />
+      <div>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <FormTitle>Buscar repositórios de um usuário</FormTitle>
 
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <FormTitle>Buscar repositórios de um usuário</FormTitle>
+          <FieldSet>
+            <Input
+              name="userName"
+              placeholder="Digite o nome do usuário"
+              icon={<MdAccountCircle />}
+            />
 
-        <FieldSet>
-          <Input
-            name="userName"
-            placeholder="Digite o nome do usuário"
-            icon={<MdAccountCircle />}
-          />
+            <Button type="submit" loading={fetching}>
+              <MdSearch id="search-icon" title="Buscar" />
+            </Button>
+          </FieldSet>
+        </Form>
 
-          <Button type="submit" loading={fetching}>
-            <MdSearch id="search-icon" title="Buscar" />
-          </Button>
-        </FieldSet>
-      </Form>
+        {isListValid(repos) && (
+          <Repos>
+            <RepoTitle>Repositórios</RepoTitle>
 
-      {isListValid(repos) && (
-        <Repos>
-          <RepoTitle>Repositórios</RepoTitle>
-
-          {repos.map(repo => (
-            <Repo
-              key={repo.id}
-              onClick={() => {
-                window.open(repo.html_url);
-              }}
-            >
-              <h4>{repo.name}</h4>
-              <small>{repo.description}</small>
-            </Repo>
-          ))}
-        </Repos>
-      )}
+            {repos.map(repo => (
+              <Repo
+                key={repo.id}
+                onClick={() => {
+                  window.open(repo.html_url);
+                }}
+              >
+                <h4>{repo.name}</h4>
+                <small>{repo.description}</small>
+              </Repo>
+            ))}
+          </Repos>
+        )}
+      </div>
     </Container>
   );
 }

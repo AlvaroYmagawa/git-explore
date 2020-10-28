@@ -10,3 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   background: ${colors.primary};
 `;
+
+export const Children = styled.div`
+  padding-top: 100px;
+`;

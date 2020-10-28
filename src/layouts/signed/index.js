@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container } from './styles';
+// CUSTOM IMPORTS
+import { Container, Children } from './styles';
+import Header from '~/components/Header';
 
 export default function DefaultLayout({ children }) {
-  return <Container>{children}</Container>;
+  return (
+    <Container>
+      <Header />
+
+      <Children>{children}</Children>
+    </Container>
+  );
 }
 
 DefaultLayout.propTypes = {

@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import { colors } from '~/styles';
 
 export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   width: 100%;
   align-items: center;
@@ -12,29 +15,17 @@ export const Container = styled.div`
   background: ${colors.primaryDark};
   box-shadow: 2px 6px 6px ${colors.black16};
 
-  svg {
+  #github-icon {
     height: 40px;
     width: auto;
     color: #f6f6f6;
   }
 `;
 
-export const ExitButton = styled.button`
-  margin-left: auto;
+export const Left = styled.div`
+  display: flex;
   cursor: pointer;
-  border: none;
-  background: none;
-  opacity: 0.6;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  #exit-icon {
-    height: 24px;
-    width: 24px;
-    color: #f6f6f6;
-  }
+  align-items: center;
 `;
 
 export const Title = styled.h4`

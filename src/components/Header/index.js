@@ -1,28 +1,20 @@
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
-import { MdExitToApp } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-// ACTIONS
-import { signOut } from '~/store/modules/auth/actions';
 
 // CUSTOM IMPORTS
-import { Container, ExitButton, Title } from './styles';
+import history from '~/services/history';
+import Avatar from '~/components/Avatar';
+import { Container, Left, Title } from './styles';
 
 function Header() {
-  const dispatch = useDispatch();
-
   return (
     <Container>
-      <FaGithub />
-      <Title>GITHUB EXPLORE</Title>
+      <Left onClick={() => history.push('/home')}>
+        <FaGithub id="github-icon" />
+        <Title>GITHUB EXPLORE</Title>
+      </Left>
 
-      <ExitButton
-        type="button"
-        title="Exit"
-        onClick={() => dispatch(signOut())}
-      >
-        <MdExitToApp id="exit-icon" />
-      </ExitButton>
+      <Avatar style={{ marginLeft: 'auto' }} />
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const reqres = axios.create({
-  baseURL: 'https://reqres.in/',
+const server = axios.create({
+  baseURL: 'http://localhost:3333',
 });
 
 const github = axios.create({
@@ -9,7 +9,7 @@ const github = axios.create({
 });
 
 const api = {
-  reqres,
+  server,
   github,
 };
 

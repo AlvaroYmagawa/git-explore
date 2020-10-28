@@ -1,7 +1,6 @@
 import produce from 'immer';
 
 // CUSTOM IMPORTS
-import { isDataValid } from '~/utils/validations';
 import types from './types';
 
 const INITIAL_STATE = {

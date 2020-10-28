@@ -12,12 +12,26 @@ import {
 import api from '~/services/api';
 import { validResponseStatus } from '~/utils/api';
 
+const setDefaultHeader = token => {
+  api.server.defaults.headers.Authorization = `Bearer ${token}`;
+};
+
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) {
+    setDefaultHeader(token);
+  }
+}
+
 // SIGN UP
 export function* signUp({ payload }) {
   try {
     const { user } = payload;
 
-    const response = yield call(api.reqres.post, 'api/users', user);
+    const response = yield call(api.server.post, 'api/users', user);
 
     if (validResponseStatus(response.status)) {
       const newUser = response.data;
@@ -36,15 +50,14 @@ export function* signIn({ payload }) {
   try {
     const { session } = payload;
 
-    const response = yield call(api.reqres.post, 'api/login', {
-      email: 'eve.holt@reqres.in',
-      password: 'pistol',
-    });
+    const response = yield call(api.server.post, '/sessions', session);
 
     if (validResponseStatus(response.status)) {
-      const { token } = response.data;
+      const { token, user } = response.data;
 
-      yield put(signInSuccessful(token, session));
+      setDefaultHeader(token);
+
+      yield put(signInSuccessful(token, user));
     }
   } catch (err) {
     yield put(signInFailed());
@@ -54,4 +67,5 @@ export function* signIn({ payload }) {
 export default all([
   takeLatest(types.SIGN_UP.REQUEST, signUp),
   takeLatest(types.SIGN_IN.REQUEST, signIn),
+  takeLatest('persist/REHYDRATE', setToken),
 ]);
