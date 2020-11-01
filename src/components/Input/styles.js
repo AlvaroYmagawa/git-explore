@@ -23,7 +23,9 @@ export const InputField = styled.div`
   align-items: center;
   padding: 0 16px;
 
-  input {
+  input,
+  textarea {
+    resize: none;
     margin: 16px;
     flex: 1;
     background: none;

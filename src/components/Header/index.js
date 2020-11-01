@@ -3,7 +3,7 @@ import { FaGithub } from 'react-icons/fa';
 
 // CUSTOM IMPORTS
 import history from '~/services/history';
-import Avatar from '~/components/Avatar';
+import Avatar from '~/components/Header/AvatarMenu';
 import { Container, Left, Title } from './styles';
 
 function Header() {

@@ -1,10 +1,15 @@
 import React from 'react';
 
-// CUSTOM IMPORTS
-import { Container } from './styles';
+import { Container, Notes, Form } from './styles';
 
 function MyProfile() {
-  return <Container />;
+  return (
+    <Container>
+      <Notes />
+
+      <Form />
+    </Container>
+  );
 }
 
 export default MyProfile;

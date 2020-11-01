@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from '@unform/core';
 import { MdError } from 'react-icons/md';
+import TextArea from 'react-autosize-textarea';
 
 // CUSTOM IMPORTS
 import { Container, InputField, Icon, Error } from './styles';
 
-function Input({ name, icon, className, ...rest }) {
+function Input({ name, icon, className, isTextArea, ...rest }) {
   const inputRef = React.useRef(null);
   const { fieldName, defaultValue, error, registerField } = useField(name);
 
@@ -22,9 +23,13 @@ function Input({ name, icon, className, ...rest }) {
   return (
     <Container className={className} isErrored={!!error}>
       <InputField>
-        <Icon>{icon}</Icon>
+        {icon && <Icon>{icon}</Icon>}
 
-        <input defaultValue={defaultValue} ref={inputRef} {...rest} />
+        {isTextArea ? (
+          <TextArea defaultValue={defaultValue} ref={inputRef} {...rest} />
+        ) : (
+          <input defaultValue={defaultValue} ref={inputRef} {...rest} />
+        )}
 
         {error && (
           <Error title={error}>
@@ -41,12 +46,14 @@ Input.propTypes = {
   isTextArea: PropTypes.bool,
   title: PropTypes.string,
   className: PropTypes.string,
+  icon: PropTypes.any,
 };
 
 Input.defaultProps = {
   isTextArea: false,
   title: '',
   className: '',
+  icon: null,
 };
 
 export default Input;

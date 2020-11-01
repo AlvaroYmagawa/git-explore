@@ -13,7 +13,7 @@ import { signUp } from '~/store/modules/auth/actions';
 import Button from '~/components/Button';
 import { getYupErrors } from '~/utils/yup';
 import { isDataValid } from '~/utils/validations';
-import { Container, Input } from './styles';
+import { Container, Input, Checkbox, Fieldset } from './styles';
 
 export default function SignUp() {
   const dispatch = useDispatch();
@@ -22,11 +22,14 @@ export default function SignUp() {
   // REFS
   const formRef = React.useRef();
 
+  // STATES
+  const [isAdmin, setIsAdmin] = React.useState(false);
+
   // FUNCTION
   const handleSubmit = React.useCallback(
     async data => {
       const dispatchSubmit = () => {
-        dispatch(signUp(data));
+        dispatch(signUp({ userData: data, isAdmin }));
       };
 
       try {
@@ -40,10 +43,6 @@ export default function SignUp() {
             .required('O nome é obrigatório.'),
 
           password: Yup.string().required('A senha é obrigatória'),
-          passwordConfirmation: Yup.string().oneOf(
-            [Yup.ref('password'), null],
-            'A confirmação de senha deve ser igual a senha'
-          ),
         });
 
         await schema.validate(data, {
@@ -59,7 +58,7 @@ export default function SignUp() {
         if (isDataValid(formRef.current)) formRef.current.setErrors(errors);
       }
     },
-    [dispatch]
+    [dispatch, isAdmin]
   );
 
   return (
@@ -93,13 +92,11 @@ export default function SignUp() {
           icon={<MdLock />}
         />
 
-        <Input
-          type="password"
-          className="auth-input"
-          name="passwordConfirmation"
-          placeholder="Confirmar Senha"
-          icon={<MdLock />}
-        />
+        <Fieldset>
+          <Checkbox checked={isAdmin} onClick={() => setIsAdmin(!isAdmin)} />
+
+          <h4>Criar conta como administradora</h4>
+        </Fieldset>
 
         <Button type="submit" className="auth-button" loading={isSigningUp}>
           Cadastrar

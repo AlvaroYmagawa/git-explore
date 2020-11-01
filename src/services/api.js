@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { showError } from '~/utils/api';
 
 const server = axios.create({
   baseURL: 'http://localhost:3333',
@@ -12,5 +13,13 @@ const api = {
   server,
   github,
 };
+
+server.interceptors.response.use(
+  response => response,
+  error => {
+    showError(error.data);
+    return Promise.reject(error);
+  }
+);
 
 export default api;

@@ -1,10 +1,10 @@
 import types from './types';
 
 // SIGN IN
-export function signUp(user) {
+export function signUp({ userData, isAdmin }) {
   return {
     type: types.SIGN_UP.REQUEST,
-    payload: { user },
+    payload: { userData, isAdmin },
   };
 }
 export function signUpSuccessful(user) {

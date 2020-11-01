@@ -29,9 +29,12 @@ export function setToken({ payload }) {
 // SIGN UP
 export function* signUp({ payload }) {
   try {
-    const { user } = payload;
+    const { userData, isAdmin } = payload;
 
-    const response = yield call(api.server.post, 'api/users', user);
+    const response = yield call(api.server.post, '/users', {
+      ...userData,
+      admin: isAdmin,
+    });
 
     if (validResponseStatus(response.status)) {
       const newUser = response.data;
