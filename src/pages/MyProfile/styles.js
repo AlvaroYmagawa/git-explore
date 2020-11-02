@@ -10,6 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Notes = styled(NoteList)`
+  width: 100%;
   max-width: 400px;
 `;
 

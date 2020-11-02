@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   isSigningUp: false,
 };
 
-export default function usersReducer(state = INITIAL_STATE, action) {
+export default function authReducer(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       // SIGN_UP

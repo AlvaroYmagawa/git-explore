@@ -12,5 +12,7 @@ export const validResponseStatus = status => {
 };
 
 export const showError = error => {
-  toast.error(error);
+  const { message } = error.response.data;
+
+  toast.error(message);
 };

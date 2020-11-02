@@ -17,7 +17,7 @@ const api = {
 server.interceptors.response.use(
   response => response,
   error => {
-    showError(error.data);
+    showError(error);
     return Promise.reject(error);
   }
 );

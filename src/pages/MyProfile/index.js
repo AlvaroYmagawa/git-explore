@@ -6,8 +6,6 @@ function MyProfile() {
   return (
     <Container>
       <Notes />
-
-      <Form />
     </Container>
   );
 }

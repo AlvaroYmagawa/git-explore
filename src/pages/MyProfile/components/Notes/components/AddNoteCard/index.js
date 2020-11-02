@@ -26,7 +26,7 @@ function AddNoteCard({ onAddNote }) {
 
   // FUNCTIONS
   const handleSubmit = React.useCallback(
-    async (data, photo) => {
+    async (data, { reset }) => {
       try {
         // Clear errors
         if (isDataValid(formRef.current)) formRef.current.setErrors({});
@@ -41,7 +41,12 @@ function AddNoteCard({ onAddNote }) {
           abortEarly: false,
         });
 
-        onAddNote({ ...data, photo });
+        onAddNote({ ...data, photo: photoUrl });
+
+        // Clear form
+        setPhotoUrl(null);
+        setPhotoPreview(null);
+        reset();
       } catch (err) {
         // Format yup errors
         const errors = getYupErrors(err);
@@ -50,12 +55,12 @@ function AddNoteCard({ onAddNote }) {
         if (isDataValid(formRef.current)) formRef.current.setErrors(errors);
       }
     },
-    [onAddNote]
+    [onAddNote, photoUrl]
   );
 
   return (
     <Card>
-      <Form ref={formRef} onSubmit={data => handleSubmit(data, photoUrl)}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           name="description"
           placeholder="Digite sua nota"
